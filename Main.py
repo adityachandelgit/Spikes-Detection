@@ -10,11 +10,11 @@ Requirements/Dependencies:
 """
 if __name__ == "__main__":
     # Load the EDA csv file
-    series = load_eda_csv('EDA.csv')
+    series = load_eda_csv('Test.csv')
 
     # Smoothen the data
     # window: the type of window from 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'
-    smooth_series = smooth(series, window_len=9, window='flat')
+    smooth_series = smooth(series, window_len=4, window='flat')
 
     # Detect peaks
     # Second param = alpha

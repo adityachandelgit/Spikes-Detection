@@ -18,7 +18,7 @@ def smooth(x, window_len=11, window='hanning'):
     This method is based on the convolution of a scaled window with the signal.
     The signal is prepared by introducing reflected copies of the signal
     (with the window size) in both ends so that transient parts are minimized
-    in the begining and end part of the output signal.
+    in the beginning and end part of the output signal.
 
     input:
         x: the input signal
@@ -46,6 +46,9 @@ def smooth(x, window_len=11, window='hanning'):
     if not window in ['flat', 'hanning', 'hamming', 'bartlett', 'blackman']:
         raise ValueError, "Window is on of 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'"
 
+    o = x[window_len - 1:0:-1]
+    p = x[-1:-window_len:-1]
+
     s = numpy.r_[x[window_len - 1:0:-1], x, x[-1:-window_len:-1]]
     if window == 'flat':  # moving average
         w = numpy.ones(window_len, 'd')
@@ -58,12 +61,8 @@ def smooth(x, window_len=11, window='hanning'):
 
 def peakdet(v, delta, x=None):
     """
-    Converted from MATLAB script at http://billauer.co.il/peakdet.html
-
-    Returns two arrays
-
     function [maxtab, mintab]=peakdet(v, delta, x)
-    %PEAKDET Detect peaks in a vector
+    %        PEAKDET Detect peaks in a vector
     %        [MAXTAB, MINTAB] = PEAKDET(V, DELTA) finds the local
     %        maxima and minima ("peaks") in the vector V.
     %        MAXTAB and MINTAB consists of two columns. Column 1
