@@ -10,15 +10,15 @@ Requirements/Dependencies:
 """
 if __name__ == "__main__":
     # Load the EDA csv file
-    series = load_eda_csv('Test.csv')
+    series = load_eda_csv('EDA.csv')
 
     # Smoothen the data
     # window: the type of window from 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'
-    smooth_series = smooth(series, window_len=4, window='flat')
+    smooth_series = smooth(series, window_len=13, window='hanning')
 
     # Detect peaks
     # Second param = alpha
-    maxTab, minTab = peakdet(smooth_series, .07)
+    maxTab, minTab = peakdet(smooth_series, 0.3)
 
     plot(smooth_series)
     scatter(array(maxTab)[:, 0], array(maxTab)[:, 1], color='red')

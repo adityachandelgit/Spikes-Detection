@@ -46,8 +46,8 @@ def smooth(x, window_len=11, window='hanning'):
     if not window in ['flat', 'hanning', 'hamming', 'bartlett', 'blackman']:
         raise ValueError, "Window is on of 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'"
 
-    o = x[window_len - 1:0:-1]
-    p = x[-1:-window_len:-1]
+    # o = x[window_len - 1:0:-1]
+    # p = x[-1:-window_len:-1]
 
     s = numpy.r_[x[window_len - 1:0:-1], x, x[-1:-window_len:-1]]
     if window == 'flat':  # moving average
