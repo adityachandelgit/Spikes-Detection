@@ -1,15 +1,7 @@
 import sys
-import csv
+
 import numpy
 from numpy import NaN, Inf, arange, isscalar, asarray, array
-
-
-def load_eda_csv(input_file):
-    with open(input_file, 'rb') as f:
-        reader = csv.reader(f)
-        series = list(reader)
-    series = [float(val) for sublist in series for val in sublist]
-    return numpy.array(series)
 
 
 def smooth(x, window_len=11, window='hanning'):
@@ -45,9 +37,6 @@ def smooth(x, window_len=11, window='hanning'):
 
     if not window in ['flat', 'hanning', 'hamming', 'bartlett', 'blackman']:
         raise ValueError, "Window is on of 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'"
-
-    # o = x[window_len - 1:0:-1]
-    # p = x[-1:-window_len:-1]
 
     s = numpy.r_[x[window_len - 1:0:-1], x, x[-1:-window_len:-1]]
     if window == 'flat':  # moving average
